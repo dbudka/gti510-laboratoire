@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://ec2-107-21-125-143.compute-1.amazonaws.com:5432/d58c08e2r37hdu?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+        <property name="username" value="mfjjfesoprvlfi"/>
+        <property name="password" value="MF7YaAloZ2j6RCVh9G5a44Rjr2"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="core.entity"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss.SS}] %-5level %c{3} - %msg%n"/>
+        </Console>
+        <RollingFile name="dbAppender" append="true" bufferedIO="true" fileName="/logs/db.log" filePattern="/logs/db-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss.SS}] %-5level %c{3} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="transactions" append="true" bufferedIO="true" fileName="/logs/transactions.log" filePattern="/logs/transactions-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss.SS}] %-5level %c{3} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="app" append="true" bufferedIO="true" fileName="/logs/application.log" filePattern="/logs/app-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss.SS}] %-5level %c{3} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.hibernate" level="DEBUG" additivity="true">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="dbAppender" />
+        </Logger>
+        <Logger name="transactions" level="WARN" additivity="false">
+            <AppenderRef ref="transactions" />
+        </Logger>
+
+        <Logger name="app" level="WARN" additivity="false">
+            <AppenderRef ref="app" />
+        </Logger>
+
+        <Root level="WARN">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
