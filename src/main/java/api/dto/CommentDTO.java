@@ -2,23 +2,22 @@ package api.dto;
 
 import java.util.Date;
 
-public class HistoryDTO extends AbstractDTO {
+public class CommentDTO extends AbstractDTO {
 
-    private Integer id;
+    private String comment;
 
     private UserDTO user;
 
     private VideoDTO video;
 
-    // used for storing the date the video has been viewed by the user and sorting them
-    private Date dateViewed;
+    private Date postDate;
 
-    public Integer getId() {
-        return id;
+    public String getComment() {
+        return comment;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public UserDTO getUser() {
@@ -35,5 +34,13 @@ public class HistoryDTO extends AbstractDTO {
 
     public void setVideo(VideoDTO video) {
         this.video = video;
+    }
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
     }
 }

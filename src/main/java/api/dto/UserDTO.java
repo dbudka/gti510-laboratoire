@@ -1,16 +1,13 @@
 package api.dto;
 
-import core.entity.AbstractEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-public class UserDTO extends AbstractEntity {
+import java.util.List;
+
+public class UserDTO extends AbstractDTO {
 
     private Integer id;
 
-    private String user;
+    private String username;
 
     private String password;
 
@@ -18,18 +15,22 @@ public class UserDTO extends AbstractEntity {
 
     private String email;
 
+    private List<HistoryDTO> videoHistory;
+
+    private List<FavoritesDTO> favoritevideos;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) { this.id = id; }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -54,5 +55,21 @@ public class UserDTO extends AbstractEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<HistoryDTO> getVideoHistory() {
+        return videoHistory;
+    }
+
+    public void setVideoHistory(List<HistoryDTO> videoHistory) {
+        this.videoHistory = videoHistory;
+    }
+
+    public List<FavoritesDTO> getFavoritevideos() {
+        return favoritevideos;
+    }
+
+    public void setFavoritevideos(List<FavoritesDTO> favoritevideos) {
+        this.favoritevideos = favoritevideos;
     }
 }

@@ -3,7 +3,7 @@ package core.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserEntity extends AbstractEntity {
 
     @Id
@@ -11,8 +11,8 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "user")
-    private String user;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -29,12 +29,12 @@ public class UserEntity extends AbstractEntity {
 
     public void setId(Integer id) { this.id = id; }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
