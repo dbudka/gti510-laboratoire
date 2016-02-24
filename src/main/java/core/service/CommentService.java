@@ -32,8 +32,8 @@ public class CommentService {
         commentDAO.save(entity);
     }
 
-    public void deleteComment(final CommentDTO comment){
-        commentDAO.delete(mapper.map(comment, CommentEntity.class));
+    public void deleteComment(final int commentID){
+        commentDAO.delete(commentDAO.findById(commentID));
     }
 
     public List<CommentDTO> findbyVideoId(int videoId){

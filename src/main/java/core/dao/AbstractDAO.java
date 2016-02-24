@@ -20,7 +20,9 @@ public abstract class AbstractDAO<T> {
     public void delete(T entity){
 
         Session session = getSessionFactory().openSession();
+        session.beginTransaction();
         session.delete(entity);
+        session.getTransaction().commit();
         session.close();
     }
 

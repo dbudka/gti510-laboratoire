@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class CommentDTO extends AbstractDTO {
 
+    private Integer id;
+
     private String comment;
 
     private String username;
@@ -13,6 +15,14 @@ public class CommentDTO extends AbstractDTO {
    private int videoId;
 
     private Date postDate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getComment() {
         return comment;

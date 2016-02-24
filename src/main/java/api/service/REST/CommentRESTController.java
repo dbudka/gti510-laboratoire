@@ -55,7 +55,7 @@ public class CommentRESTController {
     public ResponseEntity deleteComment(@PathVariable("id")int commentID) {
 
         try{
-            commentService.deleteComment(commentService.findById(commentID));
+            commentService.deleteComment(commentID);
         }catch (Exception e){
             logger.error("Error while deleting comment" + e);
             return new ResponseEntity("Erreur", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
