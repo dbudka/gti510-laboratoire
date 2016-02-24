@@ -9,4 +9,23 @@
         <date-format>MM/dd/yyyy HH:mm</date-format>
         <wildcard>true</wildcard>
     </configuration>
+
+    <mapping>
+        <class-a> core.entity.CommentEntity </class-a>
+        <class-b> api.dto.CommentDTO </class-b>
+        
+        <field>
+            <a>user.id</a>
+            <b>userId</b>
+        </field>
+        <field>
+            <a>user.username</a>
+            <b>username</b>
+        </field>
+        <field>
+            <a>video.id</a>
+            <b>videoId</b>
+        </field>
+    </mapping>
+
 </mappings>

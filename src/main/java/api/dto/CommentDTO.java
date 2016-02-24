@@ -6,9 +6,11 @@ public class CommentDTO extends AbstractDTO {
 
     private String comment;
 
-    private UserDTO user;
+    private String username;
 
-    private VideoDTO video;
+    private int userId;
+
+   private int videoId;
 
     private Date postDate;
 
@@ -20,20 +22,28 @@ public class CommentDTO extends AbstractDTO {
         this.comment = comment;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public VideoDTO getVideo() {
-        return video;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setVideo(VideoDTO video) {
-        this.video = video;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(int videoId) {
+        this.videoId = videoId;
     }
 
     public Date getPostDate() {

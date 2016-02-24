@@ -22,7 +22,7 @@
             <ul>
             <c:forEach var="comment" items="${comments}">
                 <li>
-                    <c:out value="${comment.user.username}"/>
+                    <c:out value="${comment.username}"/>
                     <c:out value="${comment.postDate}"/>
                     <c:out value="${comment.comment}"/>
                 </li>
