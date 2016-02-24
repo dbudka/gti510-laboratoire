@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="GTI510-Labo:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="gti510-labo.war">
-      <element id="artifact" artifact-name="GTI510-Labo:war exploded" />
-    </root>
-  </artifact>
-</component>

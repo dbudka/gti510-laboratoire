@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="GTI510-Labo" />
+        <module name="GTI510-Laboratoire" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="GTI510-Labo" target="1.5" />
+      <module name="GTI510-Laboratoire" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
