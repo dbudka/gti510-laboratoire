@@ -20,12 +20,9 @@ public class DetailsController {
     private CommentService commentService;
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
-    public String viewDetails(Model model,
-                              @RequestParam(defaultValue = "1") int page,
-                              @RequestParam(defaultValue = "5") int limit) {
+    public String viewDetails(Model model) {
 
         model.addAttribute("video", videoService.findById(1));
-        model.addAttribute("comments", commentService.findbyVideoIdPaginated( 1, page, limit));
         return "index";
     }
 

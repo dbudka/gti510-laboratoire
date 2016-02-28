@@ -1,8 +1,7 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="video" scope="request"  type="api.dto.VideoDTO"></jsp:useBean>
-<jsp:useBean id="comments" scope="request" type="java.util.List<api.dto.CommentDTO>"></jsp:useBean>
 
 <html lang="en">
 <jsp:include page="./partials/head.jsp"/>
@@ -40,17 +39,17 @@
                         </div>
                         <div>
                             Comment section
-                            <c:if test="${!empty comments}">
-                                <ul>
-                                    <c:forEach var="comment" items="${comments}">
-                                        <li>
-                                            <c:out value="${comment.username}"/>
-                                            <c:out value="${comment.postDate}"/>
-                                            <c:out value="${comment.comment}"/>
-                                        </li>
-                                    </c:forEach>
+                            <div>
+                                <ul id="commentList">
                                 </ul>
-                            </c:if>
+                            </div>
+                            <div>
+                                <textarea id="comentUser" rows="2" cols="20"></textarea>
+                                <input type="hidden" id="userId" value="2">
+                                <input type="hidden" id="videoId" value="${video.id}">
+                                <br/>
+                                <input type="button" id="addComment" value="Post comment">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,6 +59,10 @@
 </div>
 
 <jsp:include page="./partials/footer.jsp"/>
+<script type="text/javascript" src="/js/comment.js" ></script>
+<script type="text/javascript">
+    refreshComment(${video.id}, 1, 5, true);
+</script>
 </body>
 
 </html>

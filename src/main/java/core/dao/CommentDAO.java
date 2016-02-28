@@ -28,7 +28,7 @@ public class CommentDAO extends AbstractDAO<CommentEntity> {
     public List<CommentEntity> findByVideoId(int videoId){
         Session session = getSessionFactory().openSession();
         List<CommentEntity> list =  session.createQuery("from CommentEntity comment where comment.video.id - " + videoId
-                + " order by comment.postDate").list();
+                + " order by comment.postDate desc").list();
         session.close();
         return list;
     }
@@ -36,7 +36,7 @@ public class CommentDAO extends AbstractDAO<CommentEntity> {
     public List<CommentEntity> findByVideoIdPaginated(int videoId, int page, int limit){
         Session session = getSessionFactory().openSession();
         Query query = session.createQuery("from CommentEntity comment where comment.video.id = " + videoId
-                + " order by comment.postDate");
+                + " order by comment.postDate desc");
         query.setFirstResult(page * limit);
         query.setMaxResults(limit);
         List<CommentEntity> list = query.list();

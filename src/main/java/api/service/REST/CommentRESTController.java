@@ -48,7 +48,7 @@ public class CommentRESTController {
         }
 
 
-        return new ResponseEntity("OK", new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity("OK", new HttpHeaders(), HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
@@ -58,7 +58,7 @@ public class CommentRESTController {
             commentService.deleteComment(commentID);
         }catch (Exception e){
             logger.error("Error while deleting comment" + e);
-            return new ResponseEntity("Erreur", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Erreur", new HttpHeaders(), HttpStatus.NOT_FOUND);
         }
 
 
