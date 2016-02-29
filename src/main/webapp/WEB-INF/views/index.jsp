@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-xs-11">
                     <div class="well page active">
-                        <h1 class="header">Video Section</h1>
+                        <h1 class="header">Video Sections</h1>
 
                         <form>
                             <div class="form-group">
@@ -37,18 +37,31 @@
                             <p>${video.name}</p>
                             <a href="${video.url}">${video.url}</a>
                         </div>
-                        <div>
-                            Comment section
-                            <div>
-                                <ul id="commentList">
-                                </ul>
-                            </div>
-                            <div>
-                                <textarea id="comentUser" rows="2" cols="20"></textarea>
-                                <input type="hidden" id="userId" value="2">
-                                <input type="hidden" id="videoId" value="${video.id}">
-                                <br/>
-                                <input type="button" id="addComment" value="Post comment">
+                        <hr>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Comment section</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul id="commentList">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <form action="#" method="post">
+                                            <div class="col-xs-12">
+                                                <label for="commentUser" class="control-label">Comment</label>
+                                                <textarea id="commentUser" class="form-control" rows="5"></textarea>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <input type="button" id="addComment" class="btn btn-raised btn-default" value="Post comment">
+                                                <input type="hidden" id="userId" value="2">
+                                                <input type="hidden" id="videoId" value="${video.id}">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,7 +72,7 @@
 </div>
 
 <jsp:include page="./partials/footer.jsp"/>
-<script type="text/javascript" src="/js/comment.js" ></script>
+<script type="text/javascript" src="<c:url value="/js/comment.js" />" ></script>
 <script type="text/javascript">
     refreshComment(${video.id}, 1, 5, true);
 </script>
