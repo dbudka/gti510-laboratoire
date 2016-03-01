@@ -8,10 +8,10 @@
 <body>
 <div>
     <form id="connection-form" >
-        <input id="username" name="username" type="text"/>
-        <input id="password" name="password" type="password"/>
+        <input id="email" placeholder="Email" name="email" type="text"/>
+        <input id="password" placeholder="Password" name="password" type="password"/>
         <p>Your connection information are incorrect please try again.</p>
-        <a>Did you forget your password ? <a href=""> Click here</a>
+        <p>Did you forget your password ? <a href=""> Click here</a></p>
     </form>
 </div>
 <jsp:include page="./partials/footer.jsp"/>

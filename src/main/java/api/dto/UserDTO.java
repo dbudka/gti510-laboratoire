@@ -1,11 +1,17 @@
 package api.dto;
 
 import core.entity.AbstractEntity;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Component
+@Scope(value = "session",  proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserDTO extends AbstractEntity {
 
     private Integer id;
