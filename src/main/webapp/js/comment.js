@@ -133,11 +133,11 @@ function refreshList(comments, videoId, page, limit, clearList){
 
 $( document ).ready(function($) {
     $.material.init();
-    $("#addComment").click(function() {
+    $("input#addComment").click(function() {
         var userId = parseInt($('#userId').val());
         var videoId = parseInt($('#videoId').val());
-        var commentUser = $('#comentUser').val();
+        var commentUser = $('textarea#commentUser').val();
         PostComment(commentUser, videoId, userId);
-        $('#comentUser').val('');
+        $('textarea#commentUser').val('');
     });
 });
