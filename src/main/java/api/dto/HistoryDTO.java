@@ -1,19 +1,14 @@
 package api.dto;
 
 import java.util.Date;
-import core.entity.AbstractEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-public class HistoryDTO extends AbstractEntity {
+public class HistoryDTO extends AbstractDTO {
 
     private Integer id;
 
-    private Integer userId;
+    private UserDTO user;
 
-    private Integer videoId;
+    private VideoDTO video;
 
     // used for storing the date the video has been viewed by the user and sorting them
     private Date dateViewed;
@@ -26,27 +21,19 @@ public class HistoryDTO extends AbstractEntity {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
-    public Integer getVideoId() {
-        return videoId;
+    public VideoDTO getVideo() {
+        return video;
     }
 
-    public void setVideoId(Integer videoId) {
-        this.videoId = videoId;
-    }
-
-    public Date getDateViewed() {
-        return dateViewed;
-    }
-
-    public void setDateViewed(Date date) {
-        this.dateViewed = date;
+    public void setVideo(VideoDTO video) {
+        this.video = video;
     }
 }

@@ -1,12 +1,6 @@
 package api.dto;
 
-import core.entity.AbstractEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-public class VideoDTO extends AbstractEntity {
+public class VideoDTO extends AbstractDTO {
 
     private Integer id;
 
@@ -37,4 +31,5 @@ public class VideoDTO extends AbstractEntity {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

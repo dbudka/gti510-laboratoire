@@ -1,18 +1,13 @@
 package api.dto;
 
-import core.entity.AbstractEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-public class FavoritesDTO extends AbstractEntity {
+public class FavoritesDTO extends AbstractDTO {
 
     private Integer id;
 
-    private Integer userId;
+    private UserDTO user;
 
-    private Integer videoId;
+    private VideoDTO video;
 
     public Integer getId() {
         return id;
@@ -22,19 +17,19 @@ public class FavoritesDTO extends AbstractEntity {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
-    public Integer getVideoId() {
-        return videoId;
+    public VideoDTO getVideo() {
+        return video;
     }
 
-    public void setVideoId(Integer videoId) {
-        this.videoId = videoId;
+    public void setVideo(VideoDTO video) {
+        this.video = video;
     }
 }

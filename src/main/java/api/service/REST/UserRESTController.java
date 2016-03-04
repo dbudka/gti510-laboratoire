@@ -4,6 +4,7 @@ import api.dto.UserDTO;
 import api.dto.VideoDTO;
 import core.service.UserService;
 import core.service.VideoService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
