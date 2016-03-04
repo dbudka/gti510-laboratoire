@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/details")
+@RequestMapping("/")
 public class DetailsController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class DetailsController {
     public String viewDetails(Model model) {
 
         model.addAttribute("video", videoService.findById(1));
-        return "index";
+        return "redirect:user/connect";
     }
 
 }

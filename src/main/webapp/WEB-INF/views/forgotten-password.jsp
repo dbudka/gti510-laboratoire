@@ -1,15 +1,21 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
-<jsp:useBean id="video" scope="request"  type="api.dto.VideoDTO"></jsp:useBean>
-
 <html lang="en">
 <jsp:include page="./partials/head.jsp"/>
 <body>
+<jsp:include page="./partials/header.jsp"/>
 <div>
-    <form id="connection-form" >
-        <p>Please let us know who your are and we will send you a request to change your password.</p>
-        <input id="email" placeholder="Email" name="email" type="text"/>
+    <form id="forgot-form" >
+        <p>
+            <input id="email" placeholder="Email" name="email" />
+            <label for="email">Email required</label>
+        </p>
+
+        <label for="user-forgot-send">A email was sent to change your password.</label>
+        <p>
+            <button type="button" id="user-forgot-send" name="user-form-send" >Change password</button>
+        </p>
     </form>
 </div>
 <jsp:include page="./partials/footer.jsp"/>
