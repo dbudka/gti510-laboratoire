@@ -1,5 +1,6 @@
 package api.service.Controller;
 
+import api.dto.UserDTO;
 import core.service.CommentService;
 import core.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,19 @@ public class DetailsController {
     private VideoService videoService;
 
     @Autowired
+    UserDTO userDTO;
+
+    @Autowired
     private CommentService commentService;
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String viewDetails(Model model) {
 
+        model.addAttribute("user", userDTO);
+
+
         model.addAttribute("video", videoService.findById(1));
-        return "redirect:user/connect";
+        return "index";
     }
 
 }
