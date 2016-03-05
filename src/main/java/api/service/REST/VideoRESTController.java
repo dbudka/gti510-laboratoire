@@ -21,7 +21,7 @@ public class VideoRESTController {
 
         VideoDTO videoDTO = new VideoDTO();
         videoDTO.setName("Connor Mcdavid Goal");
-        videoDTO.setUrl("https://youtu.be/SHrMWKKii8M");
+        videoDTO.setUrl("http://www.youtube.com/embed/SHrMWKKii8M");
 
         videoService.createVideo(videoDTO);
 

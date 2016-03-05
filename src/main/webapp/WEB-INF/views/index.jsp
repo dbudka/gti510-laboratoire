@@ -14,7 +14,7 @@
             <ul>
                 <li class="active"><a href="#">Video section</a></li>
                 <li><a href="#">History</a></li>
-                <li><a href="#">Account</a></li>
+                <li><a href="/user/connect">Account</a></li>
             </ul>
         </nav>
         <div class="pages col-xs-9">
@@ -30,12 +30,11 @@
                             </div>
                         </form>
 
-                        <p>Hello world! Jeyyy !!! transforme moi en quelquechose de beau PLS !</p>
                         <div>
-                            This is the video for a test to DB :
-                            <p>${video.id}</p>
-                            <p>${video.name}</p>
-                            <a href="${video.url}">${video.url}</a>
+                            <h2>${video.name}</h2>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="${video.url}" frameborder="0" allowfullscreen></iframe>
+                            </div>
                         </div>
                         <hr>
                         <div class="panel panel-default">

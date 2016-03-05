@@ -7,22 +7,41 @@
 <jsp:include page="./partials/head.jsp"/>
 <body>
 <jsp:include page="./partials/header.jsp"/>
-<div>
-    <form id="change-password-form" >
-        <input id="id" name="id" type="hidden" value=" ${id} "/>
-        <p>
-            <input id="password" placeholder="Password" name="password" type="password"/>
-            <label for="password">Password requiered</label>
-        </p>
-        <p>
-            <input id="password2" placeholder="Password confirmation" name="password2" type="password"/>
-            <label for="password2">Password confirmation needs to be the same as the password)</label>
-        </p>
-        <label for="user-change-password-send">Your password has been reset <a href="/user/connect">click here</a> to connect</label>
-        <p>
-            <button type="button" id="user-change-password-send" name="user-form-send" >Register</button>
-        </p>
- </form>
+<div class="container-fluid main">
+    <div class="row">
+        <nav class="col-xs-3 menu">
+            <ul>
+                <li><a href="/">Video section</a></li>
+                <li><a href="#">History</a></li>
+                <li class="active"><a href="/user/connect">Account</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="pages col-xs-9">
+        <div class="row">
+            <div class="col-xs-11">
+                <div class="well page active">
+                    <h1 class="header">Login</h1>
+
+                    <form id="change-password-form" method="get">
+                        <input id="id" name="id" type="hidden" value=" ${id} "/>
+                        <div class="form-group">
+                            <input id="password" placeholder="Password" name="password" type="password" class="form-control"/>
+                            <label for="password">Password required</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="password2" placeholder="Password confirmation" name="password2" type="password" class="form-control"/>
+                            <label for="password2">Password confirmation needs to be the same as the password)</label>
+                        </div>
+
+                        <label for="user-change-password-send">Your password has been reset <a href="/user/connect">click here</a> to connect</label>
+                        <input type="submit" id="user-change-password-send" name="user-form-send" value="Save new password" class="btn btn-raised btn-default" />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <jsp:include page="./partials/footer.jsp"/>
 </body>
