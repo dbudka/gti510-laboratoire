@@ -14,7 +14,7 @@
             <ul>
                 <li class="active"><a href="#">Video section</a></li>
                 <li><a href="#">History</a></li>
-                <li><a href="#">Account</a></li>
+                <li><a href="/user/connect">Account</a></li>
             </ul>
         </nav>
         <div class="pages col-xs-9">

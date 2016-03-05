@@ -6,6 +6,10 @@
     background-image: linear-gradient(#4667a6, #3c4e89),linear-gradient(#D2D2D2,#D2D2D2) !important;
 }
 
+.form-group.is-focused label, .form-group.is-focused label.control-label{
+    color: #4667a6;
+}
+
 .header-panel {
     background-color: #4667a6;
     height: 144px;
