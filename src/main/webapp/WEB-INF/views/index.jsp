@@ -56,8 +56,6 @@
                                             </div>
                                             <div class="col-xs-12">
                                                 <input type="button" id="addComment" class="btn btn-raised btn-default" value="Post comment">
-                                                <input type="hidden" id="userId" value="2">
-                                                <input type="hidden" id="videoId" value="${video.id}">
                                             </div>
                                         </form>
                                     </div>
@@ -74,7 +72,18 @@
 <jsp:include page="./partials/footer.jsp"/>
 <script type="text/javascript" src="<c:url value="/js/comment.js" />" ></script>
 <script type="text/javascript">
-    refreshComment(${video.id}, 1, 5, true);
+    var username = '${user.username}';
+    var userId = -1;
+    <c:if test="${ !(empty user.id) }">
+    userId = ${user.id};
+    </c:if>
+    var listComment = new ListComment(userId, ${video.id}, username, 5, 1, {
+                'list': $('#commentList'),
+                'addCommentButton': $('#addComment'),
+                'commentUserText': $('#commentUser')
+            });
+
+            listComment.getListCommentFromServerAndShow();
 </script>
 </body>
 

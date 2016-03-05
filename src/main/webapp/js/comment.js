@@ -9,135 +9,149 @@ function Comment(userId, videoId, comment, username, id){
         return JSON.stringify(this);
     }
 }
+function ListComment(userId, videoId, username, limit, page, elementsUI){
+    this._comments = [];
+    this._userId = userId;
+    this._videoId = videoId;
+    this._username = username;
+    this._elementsUI = elementsUI;
+    this._limit = limit;
+    this._page = page;
+    this._lastPage = false;
 
-function PostComment(comment, videoId, userId){
-    if(comment) {
-        var newComment = new Comment(userId, videoId, comment, null, null);
-        var page = 1;
-        var limit = 5;
+    var _this = this;
+
+    this._elementsUI.addCommentButton.click(function () {
+        var commentUser = _this._elementsUI.commentUserText.val();
+        var comment = new Comment(_this._userId, _this._videoId, commentUser, _this._username);
+        _this.addComment(comment);
+        _this._elementsUI.commentUserText.val('');
+    });
+
+}
+
+ListComment.prototype = {
+
+    addComment: function (commentUser) {
+        if(commentUser && commentUser.comment && commentUser.userId != -1) {
+            var _this = this;
+            console.log(commentUser);
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                url: "/api/comment",
+                data: commentUser.serializeData(),
+                'dataType': 'json'
+            })
+                .done(function () {
+                    _this.getListCommentFromServerAndShow();
+                })
+                .fail(function () {
+                    alert('error while posting comment');
+                    return null;
+                });
+        }
+    },
+
+    deleteCommentAt: function (index) {
+        var commentUser = this._comments[index];
+        this._comments.splice(index, 1);
+        var _this = this;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            method: "POST",
-            url: "/api/comment",
-            data: newComment.serializeData(),
-            'dataType': 'json'
+            method: "DELETE",
+            url: "/api/comment/" + commentUser.id
+        }).done(function( data ) {
+            return _this.getListCommentFromServerAndShow();
+        }).fail(function(){
+            return null;
         })
-            .done(function () {
-                return refreshComment(videoId, page, limit, true);
-            })
-            .fail(function () {
-                alert('error while posting comment');
-                return null;
-            });
-    }
-}
-function getCommentAndRefreshList(page, limit, videoId, clearList){
-    var url = "/api/comment/" + videoId;
+    },
 
-    if(limit){
-        url = url + "?limit=" + limit;
-        if(page){
-            url = url + "&page=" + page;
-        }
-    }
-    else if(page){
-        url = url + "?page=" + page;
-    }
-    console.log(url);
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: "GET",
-        url: url
+    rebuildList: function () {
+        var list = this._elementsUI.list;
+        list.empty();
+        var _this = this;
 
-    }).done(function( data ) {
-        console.log('succes');
-        console.log(data);
-        //console.log(JSON.parse(data));
-        return refreshList(data, videoId, page, limit, clearList);
-    }).fail(function(){
-        console.log('fail');
-        return null;
-    })
-}
+        $.each( this._comments, function(i, userComment){
+            var comment =  $('<li>').append(userComment.username + " " + userComment.comment + " " +
+                                          (new Date(userComment.postDate)).toString() + " ");
 
-function deleteComment(commentId, videoId){
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: "DELETE",
-        url: "/api/comment/" + commentId
-    }).done(function( data ) {
-        return refreshComment(videoId,null,null, true);
-    }).fail(function(){
-        return null;
-    })
-}
 
-function refreshComment(videoId, page, limit, clearList){
-    if(!limit){
-        limit = 5;
-    }
-    if(!page){
-        page = 1;
-    }
-    getCommentAndRefreshList(page, limit, videoId, clearList);
-}
+            if(_this._userId == userComment.userId) {
+                var deleteLink = $('<a>').attr('name','deleteComment').attr('id','Comment_' + i)
+                    .attr('href','javascript:void(0);').text('delete comment');
 
-function refreshList(comments, videoId, page, limit, clearList){
-    console.log('page ' + page);
-    var addGetComment = comments.length == limit;
-    if(clearList) {
-        $('#commentList').empty();
-    }
-    else{
-        $('#commentList li:last').remove();
-    }
-    $.each( comments, function(i, userComment){
-        $('#commentList').append(
-            $('<li>')
-                .append(userComment.username + " " + userComment.comment + " " + (new Date(userComment.postDate)).toString() + " ")
-                .append($('<a>').attr('name','deleteComment').attr('id','Comment_' + userComment.id + "_" + userComment.videoId)
-                    .attr('href','javascript:void(0);').text('delete comment'))
-        );
-    });
-    if(addGetComment){
-        var pageDisplay = page + 1;
-        $('#commentList').append(
-            $('<li>')
-                .append($('<a>').attr('id','getNewComment').attr('name','getNewComment_' + videoId + "_" + pageDisplay + "_" + limit)
-                    .attr('href','javascript:void(0);').text('get old comment'))
-        );
-        $('#getNewComment').click(function(e) {
-            e.preventDefault();
-            var videoId = parseInt($(this).attr('name').split('_')[1]);
-            var page = parseInt($(this).attr('name').split('_')[2]);
-            var limit = parseInt($(this).attr('name').split('_')[3]);
-            refreshComment(videoId, page, limit, false);
+                deleteLink.click(function (e) {
+                    e.preventDefault();
+                    var commentIndex = parseInt($(this).attr('id').split('_')[1]);
+                    _this.deleteCommentAt(commentIndex);
+                });
+                comment.append(deleteLink);
+            }
+            list.append(comment);
         });
-    }
-    $('a[name=deleteComment]').click(function(e) {
-        e.preventDefault();
-        var commentid =  parseInt($(this).attr('id').split('_')[1]);
-        var videoId = parseInt($(this).attr('id').split('_')[2]);
-        deleteComment(commentid,videoId);
-    });
-}
 
-$( document ).ready(function($) {
-    $.material.init();
-    $("input#addComment").click(function() {
-        var userId = parseInt($('#userId').val());
-        var videoId = parseInt($('#videoId').val());
-        var commentUser = $('textarea#commentUser').val();
-        PostComment(commentUser, videoId, userId);
-        $('textarea#commentUser').val('');
-    });
-});
+        if(!this._lastPage){
+            var getNewLink = $('<a>').attr('id','getNewComment').attr('href','javascript:void(0);').text('get old comment');
+
+            getNewLink.click(function(e) {
+                e.preventDefault();
+                _this.getNewPage();
+            });
+
+            list.append($('<li>').append(getNewLink));
+        }
+    },
+
+    getNewPage: function (){
+        this._page += 1;
+        this.doAjaxRequestServerForCommentAndRefreshList();
+    },
+
+    getListCommentFromServerAndShow: function(){
+        this._page = 1;
+        this._lastPage = false;
+        this._comments.splice(0,this._comments.length);
+        this.doAjaxRequestServerForCommentAndRefreshList()
+    },
+
+    addCommentsToListFromServer: function(comments){
+        var _this = this;
+        $.each( comments, function(i, userComment){
+            _this._comments.push(new Comment(userComment.userId, userComment.videoId, userComment.comment,
+                userComment.username, userComment.id));
+        });
+        this._lastPage = comments.length == 0 || comments.length != this._limit;
+        this.rebuildList();
+    },
+
+    doAjaxRequestServerForCommentAndRefreshList: function(){
+        var url = "/api/comment/" + this._videoId;
+        url = url + "?limit=" + this._limit;
+        url = url + "&page=" +  this._page;
+
+        var _this = this;
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET",
+            url: url
+
+        }).done(function( data ) {
+            _this.addCommentsToListFromServer(data);
+        }).fail(function(){
+            console.log('fail');
+            return null;
+        })
+    }
+};
