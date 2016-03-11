@@ -5,19 +5,20 @@
 
 <html lang="en">
 <jsp:include page="./partials/head.jsp"/>
+
 <body>
 <jsp:include page="./partials/header.jsp"/>
 
 <div class="container-fluid main">
     <div class="row">
-        <nav class="col-xs-3 menu">
+        <nav class="col-xs-12 col-md-3 menu">
             <ul>
                 <li class="active"><a href="#">Video section</a></li>
                 <li><a href="#">History</a></li>
                 <li><a href="/user/connect">Account</a></li>
             </ul>
         </nav>
-        <div class="pages col-xs-9">
+        <div class="pages col-sm-12 col-md-9">
             <div class="row">
                 <div class="col-xs-11">
                     <div class="well page active">
@@ -42,10 +43,10 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <ul id="commentList">
-                                        </ul>
+                                        <ul id="commentList" class="list-group"></ul>
                                     </div>
                                 </div>
+                                <c:if test="${ !(empty user.id) }">
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <form action="#" method="post">
@@ -59,6 +60,7 @@
                                         </form>
                                     </div>
                                 </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>

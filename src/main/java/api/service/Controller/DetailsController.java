@@ -28,7 +28,6 @@ public class DetailsController {
 
         model.addAttribute("user", userDTO);
 
-
         model.addAttribute("video", videoService.findById(1));
         return "index";
     }

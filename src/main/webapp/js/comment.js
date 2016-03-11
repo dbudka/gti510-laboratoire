@@ -80,7 +80,7 @@ ListComment.prototype = {
         var _this = this;
 
         $.each( this._comments, function(i, userComment){
-            var comment =  $('<li>').append(userComment.username + " " + userComment.comment + " " +
+            var comment =  $('<li>').attr('class','list-group-item').append('<strong>'+userComment.username+'</strong><br>' + " " + userComment.comment + " " +
                                           (new Date(userComment.postDate)).toString() + " ");
 
 
