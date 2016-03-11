@@ -206,3 +206,11 @@
 Boostrap override
 **/
 .panel-heading {padding: 10px 15px;}
+
+/*
+Material design override
+*/
+.list-group .list-group-item{
+    border: .0625rem solid #ddd;
+    padding: .75rem 1.25rem;
+}
