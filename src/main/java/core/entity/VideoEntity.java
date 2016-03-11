@@ -17,6 +17,9 @@ public class VideoEntity extends AbstractEntity {
     @Column(name = "url")
     private String url;
 
+    @Column(name = "pic")
+    private String pic;
+
     public Integer getId() {
         return id;
     }
@@ -40,4 +43,8 @@ public class VideoEntity extends AbstractEntity {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public String getPic() { return pic; }
+
+    public void setPic(String pic) { this.pic = pic; }
 }

@@ -8,6 +8,8 @@ public class VideoDTO extends AbstractDTO {
 
     private String url;
 
+    private String pic;
+
     public Integer getId() {
         return id;
     }
@@ -32,4 +34,7 @@ public class VideoDTO extends AbstractDTO {
         this.url = url;
     }
 
+    public String getPic() { return pic; }
+
+    public void setPic(String pic) { this.pic = pic; }
 }

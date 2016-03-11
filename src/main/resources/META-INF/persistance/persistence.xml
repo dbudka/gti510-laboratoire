@@ -19,6 +19,7 @@
         <property name="packagesToScan" value="core.entity"/>
         <property name="hibernateProperties">
             <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
                 <prop key="hibernate.connection.autocommit">true</prop>
                 <prop key="hibernate.show_sql">true</prop>
