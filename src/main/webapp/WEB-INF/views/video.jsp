@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: B
-  Date: 2016-03-11
-  Time: 3:11 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="video" scope="request" type="api.dto.VideoDTO"></jsp:useBean>
@@ -13,36 +6,54 @@
 <jsp:include page="./partials/head.jsp"/>
 <body>
 <jsp:include page="./partials/header.jsp"/>
-    <div>
-        <h2>${video.name}</h2>
-        <div class="embed-responsive embed-responsive-16by9">
-            <img src="${video.pic}" alt="mcdave" id="${video.url}" />
+<div class="container-fluid main">
+    <div class="row">
+        <nav class="col-xs-12 col-md-3 menu">
+            <ul>
+                <li class="active"><a href="/">Video section</a></li>
+                <li><a href="#">History</a></li>
+                <li><a href="/user/connect">Account</a></li>
+            </ul>
+        </nav>
+        <div class="pages col-sm-12 col-md-9">
+            <div class="row">
+                <div class="col-xs-11">
+                    <div class="well page active">
+                        <h2>${video.name}</h2>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img src="${video.pic}" alt="mcdave" id="${video.url}" />
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Comment section</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <ul id="commentList" class="list-group"></ul>
+                                </div>
+                            </div>
+                            <c:if test="${ !(empty user.id) }">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <form action="#" method="post">
+                                            <div class="col-xs-12">
+                                                <label for="commentUser" class="control-label">Comment</label>
+                                                <textarea id="commentUser" class="form-control" rows="5"></textarea>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <input type="button" id="addComment" class="btn btn-raised btn-default" value="Post comment">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <hr>
-    <div class="panel panel-default">
-        <div class="panel-heading">Comment section</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul id="commentList">
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <form action="#" method="post">
-                        <div class="col-xs-12">
-                            <label for="commentUser" class="control-label">Comment</label>
-                            <textarea id="commentUser" class="form-control" rows="5"></textarea>
-                        </div>
-                        <div class="col-xs-12">
-                            <input type="button" id="addComment" class="btn btn-raised btn-default" value="Post comment">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 </div>
     <jsp:include page="./partials/footer.jsp"/>
     <script type="text/javascript" src="<c:url value="/js/comment.js" />" ></script>

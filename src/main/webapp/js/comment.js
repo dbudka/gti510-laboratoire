@@ -37,15 +37,15 @@ ListComment.prototype = {
             var _this = this;
             console.log(commentUser);
             $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                url: "/api/comment",
-                data: commentUser.serializeData(),
-                'dataType': 'json'
-            })
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    url: "/api/comment",
+                    data: commentUser.serializeData(),
+                    'dataType': 'json'
+                })
                 .done(function () {
                     _this.getListCommentFromServerAndShow();
                 })
@@ -79,27 +79,32 @@ ListComment.prototype = {
         list.empty();
         var _this = this;
 
-        $.each( this._comments, function(i, userComment){
-            var comment =  $('<li>').attr('class','list-group-item').append('<strong>'+userComment.username+'</strong><br>' + " " + userComment.comment + " " +
-                                          (new Date(userComment.postDate)).toString() + " ");
+        if (_this._comments.length>0) {
+            $.each(this._comments, function (i, userComment) {
+                var userPostDate = new Date(userComment.postDate);
+                var comment = $('<li>').attr('class', 'list-group-item').append('<strong>' + userComment.username + '</strong><br>' + " " +
+                    userComment.comment + " " + '<p class="text-muted text-right">' + userPostDate.getFullYear() + ' ' + userPostDate.getMonth() + ' ' + userPostDate.getDate() + '</p>');
 
 
-            if(_this._userId == userComment.userId) {
-                var deleteLink = $('<a>').attr('name','deleteComment').attr('id','Comment_' + i)
-                    .attr('href','javascript:void(0);').text('delete comment');
+                if (_this._userId == userComment.userId) {
+                    var deleteLink = $('<a>').attr('name', 'deleteComment').attr('id', 'Comment_' + i)
+                        .attr('href', 'javascript:void(0);').text('delete comment');
 
-                deleteLink.click(function (e) {
-                    e.preventDefault();
-                    var commentIndex = parseInt($(this).attr('id').split('_')[1]);
-                    _this.deleteCommentAt(commentIndex);
-                });
-                comment.append(deleteLink);
-            }
-            list.append(comment);
-        });
+                    deleteLink.click(function (e) {
+                        e.preventDefault();
+                        var commentIndex = parseInt($(this).attr('id').split('_')[1]);
+                        _this.deleteCommentAt(commentIndex);
+                    });
+                    comment.append(deleteLink);
+                }
+                list.append(comment);
+            });
+        } else {
+            list.prepend($('<li class="list-group-item" id="no-comment">').append($('<strong>').text('No comment')));
+        }
 
         if(!this._lastPage){
-            var getNewLink = $('<a>').attr('id','getNewComment').attr('href','javascript:void(0);').text('get old comment');
+            var getNewLink = $('<a class="btn btn-default btn-raised">').attr('id','getNewComment').attr('href','javascript:void(0);').text('get old comment');
 
             getNewLink.click(function(e) {
                 e.preventDefault();

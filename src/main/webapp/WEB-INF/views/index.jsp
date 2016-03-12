@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-xs-11">
                     <div class="well page active">
-                        <h1 class="header">Video Sections</h1>
+                        <h1 class="header">Video Section</h1>
 
                         <form action="/search" method="get">
                             <div class="form-group">
@@ -30,14 +30,18 @@
                             </div>
                         </form>
 
-                        <c:forEach items="${videos}" var="video">
-                            <div>
-                                <h2>${video.name}</h2>
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <a href="/${video.id}"><img src="${video.pic}" alt="mcdave" id="${video.url}" /></a>
-                                </div>
+                        <div class="row">
+                            <div class="col-sx-12">
+                                <c:forEach items="${videos}" var="video">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <a href="/${video.id}"><h3 class="upper-padding-10">${video.name}</h3></a>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <a href="/${video.id}"><img src="${video.pic}" alt="mcdave" id="${video.url}" class="img-responsive" /></a>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
+                        </div>
                     </div>
                 </div>
             </div>

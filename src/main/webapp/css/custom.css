@@ -197,9 +197,14 @@
     user-select: none;
 }
 
+
+
+/* New style */
 #input .inputs {
     width: 80%;
 }
+
+.upper-padding-10{padding-top:10px;}
 
 
 /**
