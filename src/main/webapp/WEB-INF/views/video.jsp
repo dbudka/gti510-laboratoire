@@ -19,35 +19,38 @@
             <div class="row">
                 <div class="col-xs-11">
                     <div class="well page active">
-                        <h2>${video.name}</h2>
+                        <h2 class="header">${video.name}</h2>
                         <div class="embed-responsive embed-responsive-16by9">
                             <img src="${video.pic}" alt="mcdave" id="${video.url}" />
                         </div>
-                    </div>
-                    <hr>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Comment section</div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <ul id="commentList" class="list-group"></ul>
-                                </div>
-                            </div>
-                            <c:if test="${ !(empty user.id) }">
+                        <hr>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Comment section</div>
+                            <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <form action="#" method="post">
-                                            <div class="col-xs-12">
-                                                <label for="commentUser" class="control-label">Comment</label>
-                                                <textarea id="commentUser" class="form-control" rows="5"></textarea>
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <input type="button" id="addComment" class="btn btn-raised btn-default" value="Post comment">
-                                            </div>
-                                        </form>
+                                        <div id="comment-loading" style="display: none;">
+                                            <img class="loading" src="/images/ring-alt.gif" alt="ajax_loader">
+                                        </div>
+                                        <ul id="commentList" class="list-group"></ul>
                                     </div>
                                 </div>
-                            </c:if>
+                                <c:if test="${ !(empty user.id) }">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <form action="#" method="post">
+                                                <div class="col-xs-12">
+                                                    <label for="commentUser" class="control-label">Comment</label>
+                                                    <textarea id="commentUser" class="form-control" rows="5"></textarea>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <input type="button" id="addComment" class="btn btn-raised btn-default" value="Post comment">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,6 +73,14 @@
         });
 
         listComment.getListCommentFromServerAndShow();
+
+
+        $(document).ajaxStart(function(){
+            $('#comment-loading').css('display','block');
+        });
+        $(document).ajaxComplete(function(){
+            $('#comment-loading').css('display','none');
+        });
     </script>
 </body>
 </html>

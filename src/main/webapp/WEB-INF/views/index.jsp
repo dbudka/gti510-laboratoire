@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-xs-11">
                     <div class="well page active">
-                        <h1 class="header">Video Section</h1>
+                        <h2 class="header">Video Section</h2>
 
                         <form action="/search" method="get">
                             <div class="form-group">

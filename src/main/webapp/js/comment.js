@@ -111,7 +111,7 @@ ListComment.prototype = {
                 _this.getNewPage();
             });
 
-            list.append($('<li>').append(getNewLink));
+            list.append($('<li class="list-group-item text-center">').append(getNewLink));
         }
     },
 
