@@ -9,14 +9,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-6 col-md-3">
-                    <h1>GTI515 - Video viewer</h1>
+                    <a href="/"><h1>GTI515 - Video viewer</h1></a>
                 </div>
 
-                <div class="col-xs-6 col-md-3">
+                <div class="col-xs-6 col-md-3" style="z-index: 5; color: white;">
                     <c:if test="${not empty user and user.username != null and not empty fn:trim(user.username)}">
-                        <div >
+                        <div>
                             <span>Welcome ${user.username}</span>
-                            <a href="/user/logout">logout</a>
                         </div>
                     </c:if>
                 </div>

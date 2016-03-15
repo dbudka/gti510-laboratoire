@@ -8,13 +8,7 @@
 <jsp:include page="./partials/header.jsp"/>
 <div class="container-fluid main">
     <div class="row">
-        <nav class="col-xs-12 col-md-3 menu">
-            <ul>
-                <li class="active"><a href="/">Video section</a></li>
-                <li><a href="#">History</a></li>
-                <li><a href="/user/connect">Account</a></li>
-            </ul>
-        </nav>
+        <jsp:include page="partials/menu.jsp" />
         <div class="pages col-sm-12 col-md-9">
             <div class="row">
                 <div class="col-xs-11">

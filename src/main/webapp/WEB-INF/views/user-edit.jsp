@@ -8,13 +8,7 @@
 
 <div class="container-fluid main">
     <div class="row">
-        <nav class="col-xs-3 menu">
-            <ul>
-                <li><a href="/">Video section</a></li>
-                <li><a href="#">History</a></li>
-                <li class="active"><a href="/user/connect">Account</a></li>
-            </ul>
-        </nav>
+        <jsp:include page="partials/menu.jsp" />
     </div>
     <div class="pages col-xs-9">
         <div class="row">
