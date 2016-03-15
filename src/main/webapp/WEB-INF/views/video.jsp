@@ -20,8 +20,8 @@
                 <div class="col-xs-11">
                     <div class="well page active">
                         <h2 class="header">${video.name}</h2>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <img src="${video.pic}" alt="mcdave" id="${video.url}" />
+                        <div>
+                            <img class="youtube" src="${video.pic}" alt="mcdave" id="${video.url}" data-toggle="modal" data-target="#myModal"/>
                         </div>
                         <hr>
                         <div class="panel panel-default">
@@ -58,8 +58,21 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="embed-responsive embed-responsive-16by9">
+                <div id="ytPlayer"></div>
+                <!--<iframe class="embed-responsive-item" src="..."></iframe>-->
+            </div>
+        </div>
+    </div>
+</div>
     <jsp:include page="./partials/footer.jsp"/>
     <script type="text/javascript" src="<c:url value="/js/comment.js" />" ></script>
+    <script type="text/javascript" src="<c:url value="/js/video.js" />" ></script>
+    <script type="text/javascript" src="https://www.youtube.com/player_api" ></script>
     <script type="text/javascript">
         var username = '${user.username}';
         var userId = -1;
