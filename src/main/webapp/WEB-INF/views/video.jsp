@@ -65,14 +65,70 @@
 </div>
     <jsp:include page="./partials/footer.jsp"/>
     <script type="text/javascript" src="<c:url value="/js/comment.js" />" ></script>
-    <script type="text/javascript" src="<c:url value="/js/video.js" />" ></script>
     <script type="text/javascript" src="https://www.youtube.com/player_api" ></script>
     <script type="text/javascript">
         var username = '${user.username}';
         var userId = -1;
-        <c:if test="${ !(empty user.id) }">
-        userId = ${user.id};
-        </c:if>
+        <c:choose>
+            <c:when  test="${ !(empty user.id) }">
+                userId = ${user.id};
+                function onYouTubePlayerAPIReady() {
+                    jQuery(document).ready(function($){
+                        $('.youtube').mousedown(function(){
+                            // Replace the 'ytplayer' element with an <iframe> and
+                            // YouTube player after the API code downloads.
+                            var player;
+                            player = new YT.Player('ytPlayer', {
+                                videoId: '${video.url}',
+                                playerVars: {'autoplay': 1, 'rel': 0},
+                                events: {
+                                    'onStateChange': onPlayerStateChange
+                                }
+                            });
+                            $('#ytPlayer').addClass('embed-responsive-item');
+                            // when video ends
+                            function onPlayerStateChange(event) {
+                                if(event.data === 0) {
+                                    $('#myModal').modal('hide');
+                                }
+                            }
+                        });
+                        $(".modal-backdrop, #myModal .close, #myModal .btn").on("click", function() {
+                            $("#myModal iframe").attr("src", $("#myModal iframe").attr("src"));
+                        });
+                    });
+                }
+            </c:when>
+            <c:otherwise>
+                function onYouTubePlayerAPIReady() {
+                    jQuery(document).ready(function($){
+                        $('.youtube').mousedown(function(){
+                            // Replace the 'ytplayer' element with an <iframe> and
+                            // YouTube player after the API code downloads.
+                            var player;
+                            player = new YT.Player('ytPlayer', {
+                                videoId: '${video.url}',
+                                playerVars: {'autoplay': 1, 'controls': 0, 'start': 5, 'end': 20, 'rel': 0},
+                                events: {
+                                    'onStateChange': onPlayerStateChange
+                                }
+                            });
+                            $('#ytPlayer').addClass('embed-responsive-item');
+                            // when video ends
+                            function onPlayerStateChange(event) {
+                                if(event.data === 0) {
+                                    $('#myModal').modal('hide');
+                                    alert('To see more, login!');
+                                }
+                            }
+                        });
+                        $(".modal-backdrop, #myModal .close, #myModal .btn").on("click", function() {
+                            $("#myModal iframe").attr("src", $("#myModal iframe").attr("src"));
+                        });
+                    });
+                }
+            </c:otherwise>
+        </c:choose>
         var listComment = new ListComment(userId, ${video.id}, username, 5, 1, {
             'list': $('#commentList'),
             'addCommentButton': $('#addComment'),
