@@ -26,7 +26,7 @@ public class SearchController extends AbstractController {
         model.addAttribute("user", userDTO);
         model.addAttribute("videos",videoService.getVideosByQuery(searchVideos));
 
-        return  checkConnection("index");
+        return  "index";
     }
 
 }
