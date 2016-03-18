@@ -2,8 +2,6 @@ package api.service.Controller;
 
 import api.dto.UserDTO;
 import core.service.UserService;
-import core.service.VideoService;
-import org.hsqldb.rights.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +19,21 @@ public class UserController {
 
     @Autowired
     UserDTO userDTO;
+
+    @RequestMapping(value = "/favorites", method=RequestMethod.GET)
+    public String viewFavorites(Model model){
+        model.addAttribute("user", userDTO);
+        model.addAttribute("videofavorites", userDTO.getVideoFavorites());
+        return "favorites";
+    }
+
+    @RequestMapping(value = "/history", method=RequestMethod.GET)
+    public String viewHistory(Model model){
+        model.addAttribute("user", userDTO);
+        model.addAttribute("videohistory", userDTO.getVideoHistory());
+
+        return "history";
+    }
 
     @RequestMapping(value = "/create", method=RequestMethod.GET)
     public String viewCreate(Model model) {
@@ -64,7 +77,7 @@ public class UserController {
         userDTO.setPassword(null);
         userDTO.setEmail(null);
         userDTO.setUsername(null);
-        userDTO.setFavoritevideos(null);
+        userDTO.setVideoFavorites(null);
         userDTO.setVideoHistory(null);
 
         model.addAttribute("user", userDTO);

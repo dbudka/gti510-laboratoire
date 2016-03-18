@@ -27,7 +27,7 @@ public class CommentDAO extends AbstractDAO<CommentEntity> {
 
     public List<CommentEntity> findByVideoId(int videoId){
         Session session = getSessionFactory().openSession();
-        List<CommentEntity> list =  session.createQuery("from CommentEntity comment where comment.video.id - " + videoId
+        List<CommentEntity> list =  session.createQuery("from CommentEntity comment where comment.video.id = " + videoId
                 + " order by comment.postDate desc").list();
         session.close();
         return list;

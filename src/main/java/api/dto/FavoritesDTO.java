@@ -1,6 +1,8 @@
 package api.dto;
 
 
+import java.util.Date;
+
 public class FavoritesDTO extends AbstractDTO {
 
     private Integer id;
@@ -8,6 +10,8 @@ public class FavoritesDTO extends AbstractDTO {
     private UserDTO user;
 
     private VideoDTO video;
+
+    private Date dateAdded;
 
     public Integer getId() {
         return id;
@@ -25,6 +29,9 @@ public class FavoritesDTO extends AbstractDTO {
         this.user = user;
     }
 
+    public boolean sameVideoId(int videoId){
+        return getVideo().getId() == videoId;
+    }
     public VideoDTO getVideo() {
         return video;
     }
@@ -32,4 +39,13 @@ public class FavoritesDTO extends AbstractDTO {
     public void setVideo(VideoDTO video) {
         this.video = video;
     }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
 }

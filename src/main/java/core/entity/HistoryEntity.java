@@ -12,11 +12,13 @@ public class HistoryEntity extends AbstractEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "userId")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private UserEntity user;
 
-    @Column(name = "videoId")
-    private Integer videoId;
+    @ManyToOne
+    @JoinColumn(name="videoId")
+    private VideoEntity video;
 
     @Column(name = "dateViewed")
     private Date dateViewed;
@@ -29,19 +31,6 @@ public class HistoryEntity extends AbstractEntity {
         this.id = id;
     }
 
-    public Integer getUserId() { return userId; }
-
-    public void setUserId(Integer user) {
-        this.userId = user;
-    }
-
-    public Integer getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(Integer video) {
-        this.videoId = video;
-    }
 
     public Date getDateViewed() {
         return dateViewed;
@@ -49,5 +38,21 @@ public class HistoryEntity extends AbstractEntity {
 
     public void setDateViewed(Date date) {
         this.dateViewed = date;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public VideoEntity getVideo() {
+        return video;
+    }
+
+    public void setVideo(VideoEntity video) {
+        this.video = video;
     }
 }

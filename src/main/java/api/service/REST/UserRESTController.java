@@ -1,6 +1,8 @@
 package api.service.REST;
 
 import api.dto.UserDTO;
+import core.service.FavoritesService;
+import core.service.HistoryService;
 import core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +25,12 @@ public class UserRESTController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HistoryService historyService;
+
+    @Autowired
+    private FavoritesService favoritesService;
 
     @RequestMapping(value="/reinitialisation", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> createVideo() {
@@ -108,6 +116,8 @@ public class UserRESTController {
         this.userDTO.setPassword(user.getEmail());
         this.userDTO.setPasswordChanging(user.getPasswordChanging());
         this.userDTO.setId(user.getId());
+        this.userDTO.setVideoHistory(this.historyService.findByUserID(user.getId()));
+        this.userDTO.setVideoFavorites(this.favoritesService.findByUserID(user.getId()));
     }
 
 
