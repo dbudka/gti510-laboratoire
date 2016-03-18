@@ -30,8 +30,8 @@
                                 <p>You are a new user ? <a href="/user/create"> Click here</a></p>
                                 <p>Did you forget your password ? <a href="/user/forgot/password"> Click here</a></p>
                             </div>
-                            <label for="user-connect">The connection information are wrong. Please try again.</label>
-                            <input  id="user-connect" name="user-connect" value="Log in" class="btn btn-raised btn-default" />
+                            <label for="user-connect">The connection information are wrong. Please try again.</label><br>
+                            <input type="submit" id="user-connect" name="user-connect" value="Login" class="btn btn-raised btn-default" />
                         </form>
                     </div>
                 </div>
