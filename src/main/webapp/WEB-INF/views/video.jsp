@@ -15,7 +15,7 @@
                     <div class="well page active">
                         <h2 class="header">${video.name}</h2>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <img src="${video.pic}" alt="mcdave" id="${video.url}" />
+                            <img class="youtube" src="${video.pic}" alt="mcdave" id="${video.url}" data-toggle="modal" data-target="#myModal"/>
                         </div>
                         <hr>
                         <c:if test="${ !(empty user.id) }">

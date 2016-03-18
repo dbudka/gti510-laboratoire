@@ -66,7 +66,7 @@ public class FavoritesRESTController {
                     } else {
                         logger.error(String.format("user tried to add a video already in his favorites videos", favoritesDTO.getUser().getId()));
 
-                        return new ResponseEntity<String>("Erreur, la vidéo est déjà dans les favoris!", new HttpHeaders(), HttpStatus.CONFLICT);
+                        return new ResponseEntity<String>("Erreur", new HttpHeaders(), HttpStatus.CONFLICT);
                     }
 
                 } else if (userDTO != null) {
