@@ -118,10 +118,8 @@ function connectUser() {
                     if(xhr.responseText == "\"3\"") {
                         $('label[for="user-connect"]').html("Too many attempts were made (3 times). We need to confirm your identity. Please check your email and fallow the steps to reset your password.");
                     }
-                    else
-                        $('label[for="user-connect"]').html("The connection information are wrong. Please try again.");
 
-                    $('label[for="user-connect"]').css('display', 'inline-block');
+                    $('div#wrong-info-connect').css('display', 'block');
                 }
             });
         }
