@@ -6,6 +6,7 @@ import core.entity.UserEntity;
 import org.dozer.DozerBeanMapper;
 import org.hsqldb.rights.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
@@ -37,6 +38,7 @@ public class UserService {
 
             user.setPasswordChanging(false);
             user.setConnectTry(0);
+            user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             UserEntity entity = UserDAO.save(mapper.map(user, UserEntity.class));
 
             if (entity != null) {
@@ -82,7 +84,7 @@ public class UserService {
 
         if (entity != null && entity.getPasswordChanging()) {
 
-            entity.setPassword(user.getPassword());
+            entity.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             entity.setPasswordChanging(false);
             entity.setConnectTry(0);
             UserDAO.update(entity);
@@ -99,7 +101,8 @@ public class UserService {
 
         UserDTO user = mapper.map(UserDAO.getUserEntityByEmail(email), UserDTO.class);
 
-        if (user != null && user.getPassword().equals(password)) {
+
+        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
 
             return user;
         }
@@ -134,7 +137,7 @@ public class UserService {
 
         String linkWithPath = link + "/user/reset/password?" + "id=" + userEntity.getId();
         String subject = "Password change";
-        String message = "This is your email for the reinitialisation : <a href='" + linkWithPath+"'>Click here!</a>";
+        String message = "This is your email for the reinitialisation : " + linkWithPath+"";
         return mailService.sendMail(userEntity.getEmail(), subject, message);
     }
 
