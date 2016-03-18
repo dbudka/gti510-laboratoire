@@ -36,12 +36,11 @@ public class DetailsController extends AbstractController{
         model.addAttribute("user", userDTO);
         model.addAttribute("videos",videoService.getAllVideos());
 
-        return checkConnection("index");
+        return "index";
     }
     @RequestMapping(value = "/{videoId}", method=RequestMethod.GET)
     public String viewDetails(Model model, @PathVariable("videoId")int videoId) {
 
-        VideoDTO videoDTO = videoService.findById(videoId);
         model.addAttribute("user", userDTO);
         model.addAttribute("video",videoDTO);
 
@@ -55,6 +54,6 @@ public class DetailsController extends AbstractController{
             historyService.createHistory(historyDTO);
             userDTO.getVideoHistory().add(historyDTO);
         }
-        return checkConnection("video");
+        return "video";
     }
 }
