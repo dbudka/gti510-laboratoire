@@ -11,6 +11,9 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "connectTry")
+    private Integer connectTry;
+
     @Column(name = "username")
     private String username;
 
@@ -59,5 +62,13 @@ public class UserEntity extends AbstractEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getConnectTry() {
+        return connectTry;
+    }
+
+    public void setConnectTry(Integer connectTry) {
+        this.connectTry = connectTry;
     }
 }

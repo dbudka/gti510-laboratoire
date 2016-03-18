@@ -36,6 +36,7 @@ public class UserService {
         if (UserDAO.getUserEntityByEmail(user.getEmail()) == null) {
 
             user.setPasswordChanging(false);
+            user.setConnectTry(0);
             UserEntity entity = UserDAO.save(mapper.map(user, UserEntity.class));
 
             if (entity != null) {
@@ -47,21 +48,46 @@ public class UserService {
             }
         }
 
+        if(user.getId()!=null) {
+            UserDAO.update(mapper.map(user, UserEntity.class));
+            return user;
+        }
+
         return null;
     }
 
+    public UserDTO addConnectTry(final UserDTO user, Integer valueToadd) {
+        UserEntity userEntity = UserDAO.getUserEntityByEmail(user.getEmail());
+        userEntity.setConnectTry(userEntity.getConnectTry()+valueToadd);
+        UserDAO.update(userEntity);
+        return user;
+    }
+
+    public Integer getConnectTry(final UserDTO user) {
+        UserEntity userEntity = UserDAO.getUserEntityByEmail(user.getEmail());
+        return userEntity.getConnectTry();
+    }
+
+
+    public UserDTO resetConnectTry(final UserDTO user) {
+        UserEntity userEntity = UserDAO.getUserEntityByEmail(user.getEmail());
+        userEntity.setConnectTry(0);
+        UserDAO.update(userEntity);
+        return user;
+    }
 
     public UserDTO updateUserPassword(final UserDTO user) {
 
         UserEntity entity = UserDAO.findById(user.getId());
-        entity.setPassword(user.getPassword());
 
         if (entity != null && entity.getPasswordChanging()) {
 
-            user.setPasswordChanging(false);
-            UserDAO.update(mapper.map(user, UserEntity.class));
+            entity.setPassword(user.getPassword());
+            entity.setPasswordChanging(false);
+            entity.setConnectTry(0);
+            UserDAO.update(entity);
 
-            mailService.sendMail(user.getEmail(), "Password changed confirmed", "You changed your password.");
+            mailService.sendMail(entity.getEmail(), "Password changed confirmed", "You changed your password.");
             return user;
 
         }
@@ -92,6 +118,7 @@ public class UserService {
 
     public boolean resetPassword(final String email, final String link) {
 
+        System.out.println(email);
         UserEntity userEntity = UserDAO.getUserEntityByEmail(email);
         if (userEntity != null) {
 
@@ -107,7 +134,7 @@ public class UserService {
 
         String linkWithPath = link + "/user/reset/password?" + "id=" + userEntity.getId();
         String subject = "Password change";
-        String message = "This is your email for the reinitialisation : " + linkWithPath;
+        String message = "This is your email for the reinitialisation : <a href='" + linkWithPath+"'>Click here!</a>";
         return mailService.sendMail(userEntity.getEmail(), subject, message);
     }
 

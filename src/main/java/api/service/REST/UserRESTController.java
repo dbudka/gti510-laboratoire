@@ -4,6 +4,7 @@ import api.dto.UserDTO;
 import core.service.FavoritesService;
 import core.service.HistoryService;
 import core.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,20 @@ public class UserRESTController {
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<String> createOrUpdateUser (UserDTO userDTO) {
 
+        if(userDTO.getId() != null) {
+            UserDTO userDTO1 = userService.findById(userDTO.getId());
+
+            if(StringUtils.isNotEmpty(userDTO.getUsername())) {
+
+                userDTO1.setUsername(userDTO.getUsername());
+            }
+
+            if(StringUtils.isNotEmpty(userDTO.getPassword())) {
+
+                userDTO1.setPassword(userDTO.getPassword());
+            }
+            userDTO = userDTO1;
+        }
 
         UserDTO userDTOCreated = userService.createOrUpdateUser(userDTO);
 
@@ -60,19 +75,31 @@ public class UserRESTController {
 
 
     @RequestMapping(value = "/connect", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<String> connectUser (UserDTO userDTO) {
+    public ResponseEntity<String> connectUser (HttpServletRequest request, UserDTO userDTO) {
 
         System.out.println("ok");
         UserDTO user = userService.connectAndGetUser(userDTO.getEmail(), userDTO.getPassword());
 
-        if(user != null) {
+        if(user != null && user.getConnectTry() <3) {
             System.out.println("ok");
 
             setUserSession(user);
 
+            userService.resetConnectTry(user);
+
             return new ResponseEntity<String>("OK", new HttpHeaders(), HttpStatus.OK);
         }
+
+        userService.addConnectTry(userDTO,1);
         System.out.println("bad");
+        if(userService.getConnectTry(userDTO) >=3){
+
+            String host = request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath());
+            Boolean change = userService.resetPassword(userDTO.getEmail(), host);
+
+            return new ResponseEntity<String>("3", new HttpHeaders(), HttpStatus.UNAUTHORIZED);
+        }
+
 
         return new ResponseEntity<String>("BAD", new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
@@ -111,9 +138,8 @@ public class UserRESTController {
 
     private void setUserSession(UserDTO user) {
         this.userDTO.setUsername(user.getUsername());
+        this.userDTO.setEmail(user.getEmail());
         this.userDTO.setPassword(user.getPassword());
-        this.userDTO.setEmail(user.getPassword());
-        this.userDTO.setPassword(user.getEmail());
         this.userDTO.setPasswordChanging(user.getPasswordChanging());
         this.userDTO.setId(user.getId());
         this.userDTO.setVideoHistory(this.historyService.findByUserID(user.getId()));

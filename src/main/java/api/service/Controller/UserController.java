@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends  AbstractController{
 
 
     @Autowired
@@ -47,7 +47,8 @@ public class UserController {
     public String viewUpdate(Model model) {
         model.addAttribute("user", userDTO);
 
-        return "user-edit";
+
+        return checkConnection("user-edit");
     }
 
     @RequestMapping(value = "/forgot/password", method=RequestMethod.GET)
@@ -62,12 +63,12 @@ public class UserController {
         model.addAttribute("user", userDTO);
         model.addAttribute("id", userId);
 
-        UserDTO userDTO = userService.findById(Integer.parseInt(userId));
+        UserDTO userDTO = userService.findById(Integer.parseInt(userId.trim()));
 
         if(userDTO != null && userDTO.getPasswordChanging())
             return "change-password";
 
-        return "redirect:connect";
+        return "redirect:/connect";
     }
 
     @RequestMapping(value = "/logout", method=RequestMethod.GET)

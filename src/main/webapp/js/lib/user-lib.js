@@ -19,24 +19,46 @@ function createEditUser() {
         var val_pass = !validator.isNull($("#password").val());
         var val_conf_pass = validator.equals($("#password").val(), $("#password2").val());
         var val_email = validator.isEmail($("#email").val());
+        var val_ok = $("#id").val();
 
-        if(!val_user) {
-            $('label[for="username"]').css('display', 'inline-block');
+
+        var continu = true;
+        if(!val_ok) {
+
+            if (!val_user) {
+                $('label[for="username"]').css('display', 'inline-block');
+                continu = false;
+            }
+
+            if (!val_pass) {
+                $('label[for="password"]').css('display', 'inline-block');
+                continu = false;
+            }
+
+            if (!val_conf_pass || val_pass != val_conf_pass) {
+                $('label[for="password2"]').css('display', 'inline-block');
+                continu = false;
+            }
+
+            if (!val_email) {
+                $('label[for="email"]').css('display', 'inline-block');
+                continu = false;
+            }
+        } else {
+
+            if(val_pass && (!val_conf_pass || val_pass != val_conf_pass)) {
+                $('label[for="password2"]').css('display', 'inline-block');
+                continu = false;
+            }
+
+
+            if (!val_user) {
+                $('label[for="username"]').css('display', 'inline-block');
+                continu = false;
+            }
         }
 
-        if(!val_pass) {
-            $('label[for="password"]').css('display', 'inline-block');
-        }
-
-        if(!val_conf_pass) {
-            $('label[for="password2"]').css('display', 'inline-block');
-        }
-
-        if(!val_email) {
-            $('label[for="email"]').css('display', 'inline-block');
-        }
-
-        if (val_user && val_pass && val_conf_pass && val_email) {
+        if (continu) {
 
                 $.ajax({
                     url: '/api/users/',
@@ -47,7 +69,7 @@ function createEditUser() {
 
                     },
                     success: function (data) {
-                        window.location.href = "/user/edit";
+                            window.location.href = "/";
                     },
                     error: function (xhr, status, error) {
 
@@ -88,12 +110,18 @@ function connectUser() {
                 beforeSend: function () {
                 },
                 success: function (data) {
-                    alert("sd");
-                    window.location.href = "/user/edit";
+
+                    window.location.href = "/";
                 },
                 error: function (xhr, status, error) {
 
-                    $('label[for="user-form-send"]').css('display', 'inline-block');
+                    if(xhr.responseText == "\"3\"") {
+                        $('label[for="user-connect"]').html("Too many attempts were made (3 times). We need to confirm your identity. Please check your email and fallow the steps to reset your password.");
+                    }
+                    else
+                        $('label[for="user-connect"]').html("The connection information are wrong. Please try again.");
+
+                    $('label[for="user-connect"]').css('display', 'inline-block');
                 }
             });
         }
@@ -124,12 +152,11 @@ function resetPassword() {
                 beforeSend: function () {
                 },
                 success: function (data) {
-                    alert("sd");
                     $('label[for="user-forgot-send"]').css('display', 'inline-block');
 
                 },
                 error: function (xhr, status, error) {
-                    alert("une err merde !");
+                    $('label[for="user-forgot-send"]').css('display', 'inline-block');
                 }
             });
         }

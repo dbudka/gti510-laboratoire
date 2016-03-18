@@ -29,6 +29,8 @@ public class UserDTO extends AbstractDTO {
 
     private List<FavoritesDTO> videoFavorites;
 
+    private Integer connectTry;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class UserDTO extends AbstractDTO {
 
     public void setVideoFavorites(List<FavoritesDTO> videoFavorites) {
         this.videoFavorites = videoFavorites;
+    }
+
+    public Integer getConnectTry() {
+        return connectTry;
+    }
+
+    public void setConnectTry(Integer connectTry) {
+        this.connectTry = connectTry;
     }
 }

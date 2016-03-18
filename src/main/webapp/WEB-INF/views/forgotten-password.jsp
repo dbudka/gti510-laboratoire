@@ -16,14 +16,14 @@
                 <div class="well page active">
                     <h1 class="header">Forgot Password</h1>
 
-                    <form id="forgot-form" method="get" action="#">
+                    <form id="forgot-form" >
                         <div class="form-group">
                             <input id="email" placeholder="Email" name="email" class="form-control" />
                             <label for="email">Email required</label>
                         </div>
 
                         <label for="user-forgot-send">A email was sent to change your password.</label>
-                        <input type="submit" id="user-forgot-send" name="user-form-send" value="Change Password" class="btn btn-raised btn-default" />
+                        <input id="user-forgot-send" name="user-forgot-send" value="Change Password" class="btn btn-raised btn-default" />
                     </form>
                 </div>
             </div>
