@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
-public class SearchController {
+public class SearchController extends AbstractController {
 
     @Autowired
     private VideoService videoService;
@@ -26,7 +26,7 @@ public class SearchController {
         model.addAttribute("user", userDTO);
         model.addAttribute("videos",videoService.getVideosByQuery(searchVideos));
 
-        return "index";
+        return  checkConnection("index");
     }
 
 }

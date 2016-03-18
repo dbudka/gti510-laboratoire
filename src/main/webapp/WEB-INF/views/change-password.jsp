@@ -17,7 +17,7 @@
                 <div class="well page active">
                     <h1 class="header">Login</h1>
 
-                    <form id="change-password-form" method="get">
+                    <form id="change-password-form" >
                         <input id="id" name="id" type="hidden" value=" ${id} "/>
                         <div class="form-group">
                             <input id="password" placeholder="Password" name="password" type="password" class="form-control"/>
@@ -29,7 +29,7 @@
                         </div>
 
                         <label for="user-change-password-send">Your password has been reset <a href="/user/connect">click here</a> to connect</label>
-                        <input type="submit" id="user-change-password-send" name="user-form-send" value="Save new password" class="btn btn-raised btn-default" />
+                        <input id="user-change-password-send" name="uuser-change-password-send" value="Save new password" class="btn btn-raised btn-default" />
                     </form>
 
                 </div>

@@ -16,7 +16,7 @@
                     <div class="well page active">
                         <h1 class="header">Login</h1>
 
-                        <form id="connection-form" method="get">
+                        <form id="connection-form" >
                             <div class="form-group">
                                 <input id="email" placeholder="Email" name="email" class="form-control" />
                                 <label for="email">email requiered</label>
@@ -27,11 +27,11 @@
                             </div>
                             <div class="col-xs-12">
                                 <p>Your connection information are incorrect please try again.</p>
-                                <p>You are a new ueser ? <a href="/user/create"> Click here</a></p>
+                                <p>You are a new user ? <a href="/user/create"> Click here</a></p>
                                 <p>Did you forget your password ? <a href="/user/forgot/password"> Click here</a></p>
                             </div>
                             <label for="user-connect">The connection information are wrong. Please try again.</label>
-                            <input type="submit" id="user-connect" name="user-form-send" value="Log in" class="btn btn-raised btn-default" />
+                            <input  id="user-connect" name="user-connect" value="Log in" class="btn btn-raised btn-default" />
                         </form>
                     </div>
                 </div>
