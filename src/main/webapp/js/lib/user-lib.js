@@ -153,6 +153,7 @@ function resetPassword() {
                 },
                 success: function (data) {
                     $('label[for="user-forgot-send"]').css('display', 'inline-block');
+                    $('#user-change-password-send').css('display', 'none');
 
                 },
                 error: function (xhr, status, error) {
@@ -194,6 +195,7 @@ function changeUserPassword() {
                 },
                 success: function (data) {
                     $('label[for="user-change-password-send"]').css('display', 'inline-block');
+                    $('#user-forgot-send').css('display','none');
                 },
                 error: function (xhr, status, error) {
                     alert("c' est la faute a marco !" + xhr.responseText);
