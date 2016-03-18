@@ -27,7 +27,7 @@ public class UserDTO extends AbstractDTO {
 
     private List<HistoryDTO> videoHistory;
 
-    private List<FavoritesDTO> favoritevideos;
+    private List<FavoritesDTO> videoFavorites;
 
     private Integer connectTry;
 
@@ -77,12 +77,12 @@ public class UserDTO extends AbstractDTO {
         this.videoHistory = videoHistory;
     }
 
-    public List<FavoritesDTO> getFavoritevideos() {
-        return favoritevideos;
+    public List<FavoritesDTO> getVideoFavorites() {
+        return videoFavorites;
     }
 
-    public void setFavoritevideos(List<FavoritesDTO> favoritevideos) {
-        this.favoritevideos = favoritevideos;
+    public void setVideoFavorites(List<FavoritesDTO> videoFavorites) {
+        this.videoFavorites = videoFavorites;
     }
 
     public Integer getConnectTry() {

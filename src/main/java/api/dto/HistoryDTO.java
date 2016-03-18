@@ -36,4 +36,12 @@ public class HistoryDTO extends AbstractDTO {
     public void setVideo(VideoDTO video) {
         this.video = video;
     }
+
+    public Date getDateViewed() {
+        return dateViewed;
+    }
+
+    public void setDateViewed(Date dateViewed) {
+        this.dateViewed = dateViewed;
+    }
 }

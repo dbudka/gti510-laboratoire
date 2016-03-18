@@ -81,7 +81,8 @@ ListComment.prototype = {
 
         if (_this._comments.length>0) {
             $.each(this._comments, function (i, userComment) {
-                var userPostDate = new Date(userComment.postDate);
+                var userPostDate = userComment.postDate;
+
                 var comment = $('<li>').attr('class', 'list-group-item').append('<strong>' + userComment.username + '</strong><br>' + " " +
                     userComment.comment + " " + '<p class="text-muted text-right">' + userPostDate.getFullYear() + ' ' + userPostDate.getMonth() + ' ' + userPostDate.getDate() + '</p>');
 
@@ -130,8 +131,10 @@ ListComment.prototype = {
     addCommentsToListFromServer: function(comments){
         var _this = this;
         $.each( comments, function(i, userComment){
-            _this._comments.push(new Comment(userComment.userId, userComment.videoId, userComment.comment,
-                userComment.username, userComment.id));
+            var t = new Comment(userComment.userId, userComment.videoId, userComment.comment,
+                userComment.username, userComment.id);
+            t.postDate = new Date(userComment.postDate);
+            _this._comments.push(t);
         });
         this._lastPage = comments.length == 0 || comments.length != this._limit;
         this.rebuildList();

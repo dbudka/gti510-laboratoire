@@ -14,10 +14,24 @@
                 <div class="col-xs-11">
                     <div class="well page active">
                         <h2 class="header">${video.name}</h2>
-                        <div>
+                        <div class="embed-responsive embed-responsive-16by9">
                             <img class="youtube" src="${video.pic}" alt="mcdave" id="${video.url}" data-toggle="modal" data-target="#myModal"/>
                         </div>
                         <hr>
+                        <c:if test="${ !(empty user.id) }">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="col-xs-12">
+                                                <input type="button" id="addToFavorites" class="btn btn-raised btn-default" value="Add to favorites">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </c:if>
                         <div class="panel panel-default">
                             <div class="panel-heading">Comment section</div>
                             <div class="panel-body">
@@ -65,6 +79,7 @@
 </div>
     <jsp:include page="./partials/footer.jsp"/>
     <script type="text/javascript" src="<c:url value="/js/comment.js" />" ></script>
+    <script type="text/javascript" src="<c:url value="/js/favorites.js" />" ></script>
     <script type="text/javascript" src="https://www.youtube.com/player_api" ></script>
     <script type="text/javascript">
         var username = '${user.username}';
@@ -137,6 +152,7 @@
 
         listComment.getListCommentFromServerAndShow();
 
+        var favo = new Favo(userId, ${video.id}, {'addToFavoriteBtn': $('#addToFavorites')});
 
         $(document).ajaxStart(function(){
             $('#comment-loading').css('display','block');

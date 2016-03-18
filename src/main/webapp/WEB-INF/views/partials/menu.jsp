@@ -6,8 +6,11 @@
 <nav class="col-xs-12 col-md-3 menu">
     <ul>
         <li><a href="/">Video section</a></li>
-        <li><a href="#">History</a></li>
-        <li><a href="/user/edit">Account</a></li>
+        <c:if test="${not empty user and user.username != null and not empty fn:trim(user.username)}">
+            <li><a href="/user/history">History</a></li>
+            <li><a href="/user/favorites">Favorites</a></li>
+        </c:if>
+        <li><a href="/user/connect">Account</a></li>
         <c:if test="${not empty user and user.username != null and not empty fn:trim(user.username)}">
             <li><a href="/user/logout">Logout</a></li>
         </c:if>

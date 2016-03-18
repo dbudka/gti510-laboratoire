@@ -1,6 +1,7 @@
 package core.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "favorites")
@@ -18,6 +19,9 @@ public class FavoritesEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name="videoId")
     private VideoEntity video;
+
+    @Column(name = "dateAdded")
+    private Date dateAdded;
 
     public Integer getId() {
         return id;
@@ -41,5 +45,14 @@ public class FavoritesEntity extends AbstractEntity {
 
     public void setVideo(VideoEntity video) {
         this.video = video;
+    }
+
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }
