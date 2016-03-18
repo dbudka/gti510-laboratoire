@@ -218,6 +218,10 @@
     top:50%; left:50%;
 }
 
+.embed-responsive {
+    cursor: pointer;
+
+}
 
 /**
 Boostrap override
